@@ -28,9 +28,7 @@ export default function LoginPanel() {
         <button onClick={handleLogin} disabled={busy}>
           {busy ? 'Logging in…' : 'Login (hadas/1234)'}
         </button>
-      ) : (
-        <span style={{ fontSize: 12 }}>Token: {token}</span>
-      )}
+      ) : ''}
       {error && <span style={{ color: 'red' }}>{error}</span>}
     </div>
   );
