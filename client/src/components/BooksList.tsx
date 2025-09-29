@@ -1,36 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getAllBooks } from '../service/books';
 
 export default function BooksList() {
   const [books, setBooks] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]   = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    getAllBooks()
-      .then((data) => {
-        setBooks(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setError(e.message || 'Failed to fetch books');
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Loading…</p>;
-  if (error)   return <p style={{ color: 'red' }}>{error}</p>;
+  const toggleBooks = () => {
+    if (!visible) {
+      // show and load
+      setLoading(true);
+      setError(null);
+      getAllBooks()
+        .then((data) => {
+          setBooks(data);
+        })
+        .catch((e) => {
+          setError(e.message || 'Failed to fetch books');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    setVisible(!visible);
+  };
 
   return (
     <div>
       <h1>Books</h1>
-      <ul>
-        {books.map((b) => (
-          <li key={b.id}>
-            {b.title} {b.author && <em>({b.author})</em>}
-          </li>
-        ))}
-      </ul>
+
+      <button onClick={toggleBooks}>
+        {visible ? 'Hide Books' : loading ? 'Loading…' : 'Show Books'}
+      </button>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {visible && (
+        <ul style={{ marginTop: 12 }}>
+          {books.map((b) => (
+            <li key={b.id}>
+              {b.title} {b.author && <em>({b.author})</em>}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

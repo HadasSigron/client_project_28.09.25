@@ -1,16 +1,16 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import BooksList from './components/BooksList'
+import { useState } from 'react';
 
 function App() {
+   const [showList, setShowList] = useState(false);
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <BooksList></BooksList>
-      </div>
+      <h1>Books App</h1>
+      <button onClick={() => setShowList(true)}>Show Books List</button>
+
+      {showList && <BooksList />}
     </>
   )
 }
