@@ -1,16 +1,19 @@
 import './App.css'
 import BooksList from './components/BooksList'
 import { useState } from 'react';
+import LoginPanel from './components/LoginPanel';
 //
 function App() {
-   const [showList, setShowList] = useState(false);
 
   return (
     <>
+      <div>
       <h1>Books App</h1>
-      <button onClick={() => setShowList(true)}>Show Books List</button>
-
-      {showList && <BooksList />}
+      <LoginPanel />
+      <div style={{ marginTop: 16 }}>
+        <BooksList />
+      </div>
+    </div>
     </>
   )
 }

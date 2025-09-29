@@ -28,7 +28,6 @@ export default function BooksList() {
 
   return (
     <div>
-      <h1>Books</h1>
 
       <button onClick={toggleBooks}>
         {visible ? 'Hide Books' : loading ? 'Loading…' : 'Show Books'}
