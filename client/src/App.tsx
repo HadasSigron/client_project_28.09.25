@@ -1,6 +1,7 @@
 import './App.css'
 import BooksList from './components/BooksList'
 import LoginPanel from './components/LoginPanel';
+import RegisterButton from './components/RegisterButton';
 //
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <div style={{ marginTop: 16 }}>
         <BooksList />
       </div>
+      <RegisterButton />
     </div>
     </>
   )

@@ -24,3 +24,7 @@ export function logout(): Promise<void> {
       localStorage.removeItem(TOKEN_KEY);
     });
 }
+
+export function register(username: string, password: string): Promise<void> {
+  return httpPost('/register', { username, password }).then(() => undefined);
+}
