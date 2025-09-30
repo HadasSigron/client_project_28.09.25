@@ -1,29 +1,19 @@
-// src/http.ts
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 
-// Create a single axios instance with baseURL from environment
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-// GET request helper
-export const httpGet = (url: string) => {
+export const httpGet = (url: string, config?: AxiosRequestConfig) => {
   return http
-    .get(url)
+    .get(url, config)
     .then(res => res.data)
-    .catch(err => {
-      // Throw server response if available, otherwise the raw error
-      throw err?.response?.data || err;
-    });
+    .catch(err => { throw err?.response?.data || err; });
 };
 
-// POST request helper
-export const httpPost = (url: string, body: any) => {
+export const httpPost = (url: string, body: any, config?: AxiosRequestConfig) => {
   return http
-    .post(url, body)
+    .post(url, body, config)
     .then(res => res.data)
-    .catch(err => {
-      // Throw server response if available, otherwise the raw error
-      throw err?.response?.data || err;
-    });
+    .catch(err => { throw err?.response?.data || err; });
 };
